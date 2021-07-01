@@ -1,0 +1,29 @@
+.single-product {
+  display: flex;
+  padding: 15px 0;
+  /* margin-bottom: 20px; */
+  border-bottom: 1px solid #000;
+}
+
+.product-image {
+  width: 40%;
+}
+
+.product-image img {
+  width: 100%;
+}
+
+.product-description {
+  width: 60%;
+  padding: 0 20px;
+}
+
+.btn {
+  padding: 8px 35px;
+  background-color: cornflowerblue;
+  color: aliceblue;
+  font-weight: bold;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+}
