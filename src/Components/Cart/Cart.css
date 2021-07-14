@@ -9,3 +9,12 @@
   background-color: #131313;
   border: none;
 }
+.btn {
+  padding: 8px 35px;
+  background-color: cornflowerblue;
+  color: aliceblue;
+  font-weight: bold;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+}
