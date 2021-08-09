@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReviewProduct from "../ReviewProduct/ReviewProduct";
 import Cart from "../Cart/Cart";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import fakeData from "../../assets/fakeData";
 import {
   getDatabaseCart,
@@ -20,12 +20,10 @@ const Review = () => {
   };
 
   const [orderPlaced, setOrderPlaced] = useState(false);
+  const history = useHistory();
 
-  const handlePlaceOrder = () => {
-    setCartData([]);
-    setOrderPlaced(true);
-    processOrder();
-    console.log("order placed");
+  const handleProceedOrder = () => {
+    history.push("/Shipment");
   };
 
   useEffect(() => {
@@ -55,8 +53,8 @@ const Review = () => {
       <div className="cart-container">
         <Cart cart={cartData}>
           {/* <Link to="/Review"> */}
-          <button onClick={handlePlaceOrder} className="btn">
-            Place Order
+          <button onClick={handleProceedOrder} className="btn">
+            Proceed to checkout
           </button>
           {/* </Link> */}
         </Cart>
