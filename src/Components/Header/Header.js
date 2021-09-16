@@ -6,6 +6,7 @@ import "./Header.css";
 
 const Header = () => {
   const [logedInUser, setLogedInUser] = useContext(UserContext);
+  console.log(logedInUser);
   return (
     <div className="header">
       <img src={logo} alt="" />
@@ -14,7 +15,7 @@ const Header = () => {
         <Link to="/Shop">Shop</Link>
         <Link to="/Review">Order Preview</Link>
         <Link to="/Manage">Manage Inventory</Link>
-        {logedInUser.email ? (
+        {logedInUser.isSigned ? (
           <button onClick={() => setLogedInUser({})}>Sign Out</button>
         ) : (
           <Link to="/Login">

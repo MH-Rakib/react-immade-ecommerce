@@ -15,7 +15,16 @@ import ProtectedRoute from "./Components/ProtectedRoute/ProtectedRoute";
 export const UserContext = createContext();
 
 function App() {
-  const [logedInUser, setLogedInUser] = useState([]);
+  const [logedInUser, setLogedInUser] = useState({
+    isSigned: false,
+    name: " ",
+    email: " ",
+    password: " ",
+    message: "",
+  });
+
+  console.log(logedInUser);
+
   return (
     <UserContext.Provider value={[logedInUser, setLogedInUser]}>
       <div className="">
