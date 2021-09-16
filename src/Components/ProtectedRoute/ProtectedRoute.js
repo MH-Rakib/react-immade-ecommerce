@@ -10,7 +10,7 @@ const ProtectedRoute = ({ children, ...rest }) => {
       <Route
         {...rest}
         render={({ location }) =>
-          logedInUser.email ? (
+          logedInUser.isSigned ? (
             children
           ) : (
             <Redirect

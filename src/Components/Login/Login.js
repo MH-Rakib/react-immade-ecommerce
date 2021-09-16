@@ -22,7 +22,6 @@ const Login = () => {
     name: " ",
     email: " ",
     password: " ",
-    // errorMessage: "",
     message: " ",
   });
 
@@ -48,14 +47,15 @@ const Login = () => {
       createUserWithEmailAndPassword(user.email, user.password).then((res) => {
         setUser(res);
         setLogedInUser(res);
-        user.isSigned && history.replace(from);
+
+        res.isSigned && history.replace(from);
       });
     }
     if (!userCreate && user.email && user.password) {
       signInwithEmailandPassword(user.email, user.password).then((res) => {
         setUser(res);
         setLogedInUser(res);
-        if (user.isSigned) {
+        if (res.isSigned) {
           history.replace(from);
         }
       });
