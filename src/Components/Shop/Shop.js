@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import fakeData from "../../assets/fakeData";
 import {
   addToDatabaseCart,
   getDatabaseCart,
@@ -11,23 +10,31 @@ import "./Shop.css";
 
 const Shop = () => {
   // const products = fakeData.splice(0, 10);
-  const [product, setProduct] = useState(fakeData);
+  const [products, setProduct] = useState([]);
   // console.log(product);
   const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/products`)
+      .then((res) => res.json())
+      .then((data) => setProduct(data));
+  }, []);
 
   useEffect(() => {
     const cart = getDatabaseCart();
     const productKeys = Object.keys(cart);
     // console.log(productKeys);
-    const cartData = productKeys.map((eachKey) => {
-      const product = fakeData.find((prd) => prd.key === eachKey);
-      // console.log(product);
-      product.quantity = cart[eachKey];
-      // console.log(product);
-      return product;
-    });
-    setCart(cartData);
-  }, []);
+    if (products.length > 0) {
+      const cartData = productKeys.map((eachKey) => {
+        const product = products.find((prd) => prd.key === eachKey);
+        // console.log(product);
+        product.quantity = cart[eachKey];
+        // console.log(product);
+        return product;
+      });
+      setCart(cartData);
+    }
+  }, [products]);
 
   const handleOnClick = (product) => {
     // console.log("Product Added", product);
@@ -58,7 +65,7 @@ const Shop = () => {
     <div className="container">
       <div className="products-container">
         <h2>All the Products</h2>
-        {product.map((product) => (
+        {products.map((product) => (
           <Product
             key={product.key}
             showButton={true}

@@ -3,7 +3,7 @@ import "./Cart.css";
 
 const Cart = (props) => {
   const total = props.cart.reduce(
-    (total, prd) => (total = total + prd.price * prd.quantity),
+    (total, prd) => (total = total + prd.price * prd.quantity || 1),
     0
   );
   let shippingCost = 0.0;

@@ -14,7 +14,7 @@ const Review = () => {
   const [cartData, setCartData] = useState([]);
 
   const handleRemove = (productKey) => {
-    const newCartData = cartData.filter((prd) => prd.key != productKey);
+    const newCartData = cartData.filter((prd) => prd.key !== productKey);
     setCartData(newCartData);
     removeFromDatabaseCart(productKey);
   };
@@ -30,12 +30,20 @@ const Review = () => {
     const savedCart = getDatabaseCart();
     const keys = Object.keys(savedCart);
 
-    const cartProducts = keys.map((key) => {
-      const product = fakeData.find((prd) => prd.key === key);
-      product.quantity = savedCart[key];
-      return product;
-    });
-    setCartData(cartProducts);
+    fetch(`http://localhost:5000/productsByKeys`, {
+      method: "POST",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(keys),
+    })
+      .then((res) => res.json())
+      .then((data) => setCartData(data));
+
+    // const cartProducts = keys.map((key) => {
+    //   const product = fakeData.find((prd) => prd.key === key);
+    //   product.quantity = savedCart[key];
+    //   return product;
+    // });
+    // setCartData(cartProducts);
   }, []);
   return (
     <div className="container">
